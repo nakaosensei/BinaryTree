@@ -86,6 +86,9 @@ void teste3(){
 	ab_imprime(&arvore);
 	printf("%d\n",ab_altura(arvore));
 	printf("%d\n",ab_total_vertices(arvore));
+	ab_imprime(&arvore);
+	ab_destruir(&arvore);
+	ab_imprime(&arvore);
 }
 
 int main(){

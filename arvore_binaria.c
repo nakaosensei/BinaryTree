@@ -103,7 +103,34 @@ bool contemEsqBranch(No *node){
 
 
 void ab_destruir(No **enderecoRaiz){
-    return;
+    if(*enderecoRaiz==NULL) return;    
+    int lenAtuais=1;
+    int qtdeProximos=1;
+    No** atuais = (No**)calloc(2,sizeof(No*));    
+    atuais[0]=*enderecoRaiz;    
+    while(qtdeProximos>0){
+        qtdeProximos=0;
+        No** proximos = (No**)calloc(lenAtuais*2, sizeof(No*));
+        for(int i = 0;i<lenAtuais;i++){
+            if (atuais[i]==NULL) continue;            
+            if(atuais[i]->esq!=NULL){
+                proximos[qtdeProximos]=atuais[i]->esq;
+                qtdeProximos++;
+            }
+            if(atuais[i]->dir!=NULL){
+                proximos[qtdeProximos]=atuais[i]->dir;
+                qtdeProximos++;
+            }          
+        }        
+        for(int i = 0;i<lenAtuais;i++){
+            free(atuais[i]);
+        }
+        free(atuais);
+        atuais = proximos;
+        lenAtuais=qtdeProximos;
+    }
+    free(*enderecoRaiz);
+    *enderecoRaiz=NULL;
 }
 
 bool ab_inserir(No **enderecoRaiz, TipoElemento elemento){
